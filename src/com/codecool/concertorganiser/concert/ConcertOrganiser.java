@@ -1,6 +1,5 @@
 package com.codecool.concertorganiser.concert;
 
-import com.codecool.concertorganiser.ConcertManager;
 import com.codecool.concertorganiser.band.MainBand;
 import com.codecool.concertorganiser.band.WarmUpBand;
 import com.codecool.concertorganiser.util.MyRandom;
@@ -15,22 +14,17 @@ public class ConcertOrganiser implements ConcertManager {
 
     private List<Concert> outdoorConcerts = new ArrayList<>();
 
-    private List<MainBand> mainBands = new ArrayList<>();
+    private List<MainBand> mainBands = new LinkedList<>();
 
     private List<WarmUpBand> warmUpBands = new LinkedList<>();
 
     private boolean isRaining;
 
-    private ConcertManager concertManager;
-
     public void addConcert(Concert concert){
-        concert.setConcertManager(this);
         concerts.add(concert);
     }
 
     public void addOutdoorConcert(Concert concert){
-        concert.setConcertManager(this);
-
         outdoorConcerts.add(concert);
     }
 
@@ -51,7 +45,12 @@ public class ConcertOrganiser implements ConcertManager {
         }
 
         for (Concert concert : outdoorConcerts) {
-            income += concert.calculateIncome();
+            setRaining();
+            if(isRaining){
+                isRaining = false;
+            }else {
+                income += concert.calculateIncome();
+            }
         }
 
         return income;

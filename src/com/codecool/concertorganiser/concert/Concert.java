@@ -1,6 +1,5 @@
 package com.codecool.concertorganiser.concert;
 
-import com.codecool.concertorganiser.ConcertManager;
 import com.codecool.concertorganiser.band.MainBand;
 import com.codecool.concertorganiser.band.MusicStyle;
 import com.codecool.concertorganiser.band.WarmUpBand;
@@ -25,12 +24,13 @@ public class Concert {
 
     private int visitors;
 
-    public Concert(MainBand mainBand, ConcertType concertType){
+    public Concert(MainBand mainBand, ConcertType concertType, ConcertManager concertManager){
         this.mainBand = mainBand;
         this.concertType = concertType;
         setVisitors();
         setTicketPrice();
         setStyle();
+        setConcertManager(concertManager);
         setWarmUpBand(mainBand);
     }
 
@@ -55,7 +55,7 @@ public class Concert {
     }
 
     private int calculateBeerIncome(){
-        return (concertType.duration / 30) * concertType.beerPrice;
+        return ((concertType.duration / 30) * visitors) * concertType.beerPrice;
     }
 
     private int calculateTicketIncome(){

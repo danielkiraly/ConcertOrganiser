@@ -6,6 +6,11 @@ public abstract class Band {
 
     protected MusicStyle style;
 
+    public Band(String name, MusicStyle style){
+        this.name = name;
+        this.style = style;
+    }
+
     public MusicStyle getStyle() {
         return style;
     }

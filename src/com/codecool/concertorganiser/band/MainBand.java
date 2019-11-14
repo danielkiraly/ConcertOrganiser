@@ -4,16 +4,13 @@ import java.util.List;
 
 public class MainBand extends Band {
 
-    public MainBand(MusicStyle style){
-        super.style = style;
-
+    public MainBand(String name, MusicStyle style){
+        super(name, style);
     }
-
-
 
     public WarmUpBand setWarmUpBand(List<WarmUpBand> warmUpBands){
         for (WarmUpBand warmUpBand : warmUpBands) {
-            if(warmUpBand.getStyle().equals(super.style)){
+            if(warmUpBand.getStyle().equals(style)){
                 return warmUpBand;
             }
         }
